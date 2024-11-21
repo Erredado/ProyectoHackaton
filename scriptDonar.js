@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function displayDonors() {
+        const donorsList = document.getElementById('donorsList');
         donorsList.innerHTML = '';
         donors.forEach((donor, index) => {
             const row = document.createElement('tr');
@@ -86,8 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <td>$${donor.donationAmount.toFixed(2)}</td>
                 <td>${donor.donationFrequency}</td>
                 <td>
-                    <button onclick="editDonor(${index})">Editar</button>
-                    <button onclick="deleteDonor(${index})">Eliminar</button>
+                    <button onclick="editDonor(${index})"><i class="fas fa-edit"></i></button>
+                    <button onclick="deleteDonor(${index})"><i class="fas fa-trash"></i></button>
                 </td>
             `;
             donorsList.appendChild(row);
@@ -128,10 +129,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     exportBtn.addEventListener('click', () => {
+        const donors = JSON.parse(localStorage.getItem('donors')) || [];
         const csvContent = "data:text/csv;charset=utf-8," 
             + "ID,Nombre,Email,Proyecto,Monto,Frecuencia,Método de Pago,Mensaje\n"
             + donors.map(d => `${d.idNumber},${d.fullName},${d.email},${d.project},${d.donationAmount},${d.donationFrequency},${d.paymentMethod},"${d.message}"`).join("\n");
-
+    
         const encodedUri = encodeURI(csvContent);
         const link = document.createElement("a");
         link.setAttribute("href", encodedUri);
