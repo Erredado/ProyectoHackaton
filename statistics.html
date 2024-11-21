@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas de Donaciones - DonarAyuda</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <i class="fas fa-hands-helping"></i> DonarAyuda
+        </a>
+
+        <nav class="navbar">
+            <a href="index.html">Inicio</a>
+            <a href="index.html#about">Nosotros</a>
+            <a href="index.html#projects">Proyectos</a>
+            <a href="index.html#testimonials">Testimonios</a>
+            <a href="index.html#gallery">Galería</a>
+            <a href="blog.html">Blog</a>
+            <a href="donate.html">Donar Ahora</a>
+        </nav>
+
+        <div class="icons">
+            <div class="fas fa-bars" id="menu-btn"></div>
+        </div>
+    </header>
+
+    <!-- Statistics Section -->
+    <section class="statistics">
+        <h1 class="heading">Estadísticas de <span>Donaciones</span></h1>
+        
+        <div class="chart-container">
+            <canvas id="donationChart"></canvas>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+            <a href="#" class="fab fa-linkedin"></a>
+        </div>
+
+        <div class="links">
+            <a href="index.html">Inicio</a>
+            <a href="index.html#about">Nosotros</a>
+            <a href="index.html#projects">Proyectos</a>
+            <a href="index.html#testimonials">Testimonios</a>
+            <a href="index.html#gallery">Galería</a>
+            <a href="blog.html">Blog</a>
+            <a href="donate.html">Donar</a>
+        </div>
+
+        <div class="credit">Creado por <span>Tu Equipo</span> | Todos los derechos reservados</div>
+    </footer>
+
+    <script src="statistics.js"></script>
+</body>
+</html>
