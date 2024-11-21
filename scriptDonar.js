@@ -29,6 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return false;
         }
         
+        if (field.id === 'password' && value.length < 8) {
+            errorElement.textContent = 'La contraseña debe tener al menos 8 caracteres';
+            return false;
+        }
+        
         errorElement.textContent = '';
         return true;
     }
@@ -39,19 +44,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const fullName = document.getElementById('fullName');
         const email = document.getElementById('email');
         const idNumber = document.getElementById('idNumber');
+        const password = document.getElementById('password');
         const project = document.getElementById('project');
         const paymentMethod = document.getElementById('paymentMethod');
         const donationAmount = document.getElementById('donationAmount');
         const donationFrequency = document.getElementById('donationFrequency');
         const message = document.getElementById('message');
         
-        const fields = [fullName, email, idNumber, project, paymentMethod, donationAmount, donationFrequency];
+        const fields = [fullName, email, idNumber, password, project, paymentMethod, donationAmount, donationFrequency];
         
         if (fields.every(validateField)) {
             const donor = {
                 fullName: fullName.value,
                 email: email.value,
                 idNumber: idNumber.value,
+                password: password.value,
                 project: project.value,
                 paymentMethod: paymentMethod.value,
                 donationAmount: parseFloat(donationAmount.value),
@@ -75,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function displayDonors() {
-        const donorsList = document.getElementById('donorsList');
         donorsList.innerHTML = '';
         donors.forEach((donor, index) => {
             const row = document.createElement('tr');
@@ -100,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('fullName').value = donor.fullName;
         document.getElementById('email').value = donor.email;
         document.getElementById('idNumber').value = donor.idNumber;
+        document.getElementById('password').value = donor.password;
         document.getElementById('project').value = donor.project;
         document.getElementById('paymentMethod').value = donor.paymentMethod;
         document.getElementById('donationAmount').value = donor.donationAmount;
@@ -129,11 +136,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     exportBtn.addEventListener('click', () => {
-        const donors = JSON.parse(localStorage.getItem('donors')) || [];
         const csvContent = "data:text/csv;charset=utf-8," 
             + "ID,Nombre,Email,Proyecto,Monto,Frecuencia,Método de Pago,Mensaje\n"
             + donors.map(d => `${d.idNumber},${d.fullName},${d.email},${d.project},${d.donationAmount},${d.donationFrequency},${d.paymentMethod},"${d.message}"`).join("\n");
-    
+
         const encodedUri = encodeURI(csvContent);
         const link = document.createElement("a");
         link.setAttribute("href", encodedUri);
